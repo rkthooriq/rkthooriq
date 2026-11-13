@@ -10,6 +10,8 @@ STATIC=1 python3 scripts/render_readme_cards.py --output /tmp/rkthooriq-static-c
 
 Perintah render biasa bisa dijalankan tanpa jaringan dengan snapshot yang sudah tersimpan. Mode statis menghapus CSS animasi dan menampilkan posisi akhir semua elemen.
 
+Potret kartu pembuka berasal dari [avatar publik GitHub @rkthooriq](https://github.com/rkthooriq). Garis potret disimpan di `assets/portrait-rows.txt` dan disematkan langsung ke SVG saat render.
+
 ## Data dan jadwal
 
 Snapshot mencakup 365 hari UTC yang sudah selesai. Hari tanpa kontribusi hanya dicatat sebagai nol bila kalender GitHub memang menyatakan demikian. Hitungan mengikuti kalender yang tersedia untuk pengunjung tanpa login, termasuk hitungan privat anonim bila pemilik profil sudah menampilkannya di GitHub. Bulan pertama dan terakhir pada grafik dapat berupa bulan parsial. Hari tersibuk dan bulan tersibuk memakai tanggal paling awal bila nilainya seri. Rentetan dihitung dalam jendela 365 hari yang sama.

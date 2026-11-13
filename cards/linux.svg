@@ -1,14 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="280" height="137"
-     viewBox="0 0 280 137" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="157"
+     viewBox="0 0 280 157" role="img" aria-labelledby="title description">
   <title id="title">Linux</title>
   <desc id="description">Shell dan izin akses Layanan systemd</desc>
   <style>
-    text { font-family: system-ui, sans-serif; fill: #edf3f1; }
-    .mono { font-family: ui-monospace, monospace; letter-spacing: 1.25px; }
-    .muted { fill: #a6b5b9; }
-    .mint { fill: #82e3c0; }
-    .amber { fill: #f3c580; }
-    .blue { fill: #a5c9ff; }
+    text { font-family: system-ui, sans-serif; fill: #171717; }
+    .serif { font-family: Georgia, "Times New Roman", serif; }
+    .italic { font-style: italic; }
+    .mono { font-family: ui-monospace, monospace; letter-spacing: 1px; }
+    .muted { fill: #555452; }
+    .blue { fill: #304bf4; }
+    .white { fill: #fff; }
 
     @media (prefers-reduced-motion: no-preference) {
       .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
@@ -20,6 +21,6 @@
       @keyframes grow { from { transform: scaleY(0); } }
     }
   </style>
-  <rect x="0.5" y="0.5" width="279" height="136" rx="16" fill="#12191e" stroke="#303e46"/>
-  <g class="enter" style="animation-delay:1360ms"><rect x="20" y="23" width="26" height="3" rx="1" fill="#82e3c0" stroke="none"/><text x="20" y="62" class="" font-size="33" font-weight="730" text-anchor="start">Linux</text><text x="254" y="61" class="mint" font-size="24" font-weight="400" text-anchor="end">↗</text><text x="20" y="91" class="muted" font-size="20" font-weight="400" text-anchor="start">Shell dan izin akses</text><text x="20" y="116" class="muted" font-size="20" font-weight="400" text-anchor="start">Layanan systemd</text></g>
+  <rect x="0.5" y="0.5" width="279" height="156" rx="16" fill="#304bf4" stroke="none"/>
+  <g class="enter" style="animation-delay:1300ms"><text x="22" y="69" class="serif italic white" font-size="38" font-weight="400" text-anchor="start">Linux</text><text x="254" y="35" class="white" font-size="21" font-weight="400" text-anchor="end">↗</text><text x="23" y="105" class="white" font-size="17" font-weight="400" text-anchor="start">Shell dan izin akses</text><text x="23" y="131" class="white" font-size="17" font-weight="400" text-anchor="start">Layanan systemd</text></g>
 </svg>
