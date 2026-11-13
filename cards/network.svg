@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="137"
+     viewBox="0 0 280 137" role="img" aria-labelledby="title description">
+  <title id="title">Jaringan</title>
+  <desc id="description">TCP/IP dan DNS Routing dan socket</desc>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #edf3f1; }
+    .mono { font-family: ui-monospace, monospace; letter-spacing: 1.25px; }
+    .muted { fill: #a6b5b9; }
+    .mint { fill: #82e3c0; }
+    .amber { fill: #f3c580; }
+    .blue { fill: #a5c9ff; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
+      .cell { animation: reveal 420ms ease-out both; }
+      .bar { animation: grow 520ms ease-out both; transform-origin: center bottom;
+             transform-box: fill-box; }
+      @keyframes enter { from { opacity: 0; transform: translateY(8px); } }
+      @keyframes reveal { from { opacity: 0; } }
+      @keyframes grow { from { transform: scaleY(0); } }
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="279" height="136" rx="16" fill="#12191e" stroke="#303e46"/>
+  <g class="enter" style="animation-delay:1450ms"><rect x="20" y="23" width="26" height="3" rx="1" fill="#a5c9ff" stroke="none"/><text x="20" y="62" class="" font-size="33" font-weight="730" text-anchor="start">Jaringan</text><text x="254" y="61" class="blue" font-size="24" font-weight="400" text-anchor="end">↗</text><text x="20" y="91" class="muted" font-size="20" font-weight="400" text-anchor="start">TCP/IP dan DNS</text><text x="20" y="116" class="muted" font-size="20" font-weight="400" text-anchor="start">Routing dan socket</text></g>
+</svg>
