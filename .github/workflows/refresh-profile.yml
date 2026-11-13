@@ -24,9 +24,7 @@ jobs:
         run: python3 scripts/fetch_contributions.py rkthooriq
       - name: Render contribution cards
         run: python3 scripts/render_readme_cards.py
-      - name: Refresh the featured repository
-        env:
-          FEATURED_REPOSITORY: ${{ vars.FEATURED_REPOSITORY }}
+      - name: Refresh the latest public repository and tech stack
         run: python3 -B scripts/refresh_featured_repo.py
       - name: Commit updated profile cards
         run: |

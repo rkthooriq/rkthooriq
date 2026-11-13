@@ -195,24 +195,6 @@ def project_card(title, description, label):
     return svg(880, 137, title, description, animate(content, 1560))
 
 
-def project():
-    return project_card(
-        "Computer Systems Fundamentals",
-        "Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.",
-        "REPO BELAJAR",
-    )
-
-
-def tile(title, lines, background, delay):
-    content = (
-        text(22, 69, title, 38, style="serif italic light")
-        + text(254, 35, "↗", 21, style="light", anchor="end")
-        + text(23, 105, lines[0], 17, style="light")
-        + text(23, 131, lines[1], 17, style="light")
-    )
-    return svg(280, 157, title, " ".join(lines), animate(content, delay), background=background)
-
-
 def read_days(path):
     payload = json.loads(path.read_text(encoding="utf-8"))
     start = date.fromisoformat(payload["start"])
@@ -236,10 +218,6 @@ def main():
         "hero": hero(),
         "calendar": heatmap(days),
         "monthly": monthly(days),
-        "project": project(),
-        "linux": tile("Linux", ("Shell dan izin akses", "Layanan systemd"), NAVY, 1300),
-        "network": tile("Jaringan", ("TCP/IP dan DNS", "Routing dan socket"), PEACOCK, 1380),
-        "labs": tile("Lab terminal", ("Eksperimen sistem", "Catat hasil observasi"), NAVY, 1460),
     }
     args.output.mkdir(parents=True, exist_ok=True)
     for name, content in cards.items():
