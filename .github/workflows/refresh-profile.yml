@@ -26,7 +26,7 @@ jobs:
         run: python3 scripts/render_readme_cards.py
       - name: Commit updated contribution data and cards
         run: |
-          git add -- data/contributions.json cards/calendar.svg cards/monthly.svg
+          git add -- data/contributions.json cards/paper/calendar.svg cards/paper/monthly.svg
           if git diff --cached --quiet; then
             exit 0
           fi

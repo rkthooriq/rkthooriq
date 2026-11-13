@@ -225,7 +225,7 @@ def read_days(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=ROOT / "data/contributions.json")
-    parser.add_argument("--output", type=Path, default=ROOT / "cards")
+    parser.add_argument("--output", type=Path, default=ROOT / "cards" / "paper")
     args = parser.parse_args()
     days = read_days(args.data)
     cards = {
