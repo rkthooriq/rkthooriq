@@ -11,20 +11,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATIC = os.environ.get("STATIC") == "1"
 MONTHS = ("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des")
-PAPER = "#f3f2ee"
-INK = "#171717"
-BLUE = "#304bf4"
-RED = "#c62c24"
-YELLOW = "#ffc71c"
-HEAT = ("#dfe4ff", "#a6b4ff", "#778dff", "#5068ff", BLUE)
-STYLE = """
-    text { font-family: system-ui, sans-serif; fill: #171717; }
-    .serif { font-family: Georgia, "Times New Roman", serif; }
-    .italic { font-style: italic; }
-    .mono { font-family: ui-monospace, monospace; letter-spacing: 1px; }
-    .muted { fill: #555452; }
-    .blue { fill: #304bf4; }
-    .white { fill: #fff; }
+IVORY = "#f1f3ce"
+NAVY = "#00293c"
+PEACOCK = "#1e656d"
+RULE = "#cbd5b6"
+HEAT = ("#dce5c8", "#9dbfb0", "#659e97", "#387e80", PEACOCK)
+STYLE = f"""
+    text {{ font-family: system-ui, sans-serif; fill: {NAVY}; }}
+    .serif {{ font-family: Georgia, "Times New Roman", serif; }}
+    .italic {{ font-style: italic; }}
+    .mono {{ font-family: ui-monospace, monospace; letter-spacing: 1px; }}
+    .muted {{ fill: #45605d; }}
+    .accent {{ fill: {PEACOCK}; }}
+    .light {{ fill: {IVORY}; }}
 """
 MOTION = """
     @media (prefers-reduced-motion: no-preference) {
@@ -49,7 +48,7 @@ def rect(x, y, width, height, fill, radius=0, stroke="none"):
             f'fill="{fill}" stroke="{stroke}"/>')
 
 
-def line(x1, y1, x2, y2, stroke="#d8d6cf"):
+def line(x1, y1, x2, y2, stroke=RULE):
     return f'<path d="M{x1} {y1}L{x2} {y2}" fill="none" stroke="{stroke}"/>'
 
 
@@ -59,7 +58,7 @@ def animate(content, delay, kind="enter"):
     return f'<g class="{kind}" style="animation-delay:{delay}ms">{content}</g>'
 
 
-def svg(width, height, title, description, content, *, background=PAPER):
+def svg(width, height, title, description, content, *, background=IVORY):
     style = STYLE if STATIC else STYLE + MOTION
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-labelledby="title description">
@@ -74,12 +73,12 @@ def svg(width, height, title, description, content, *, background=PAPER):
 
 def hero():
     identity = (
-        rect(41, 40, 8, 8, BLUE, 1)
+        rect(41, 40, 8, 8, PEACOCK, 1)
         + text(62, 49, "CATATAN BELAJAR SISTEM", 12, style="mono muted")
         + text(36, 135, "Raditya Kemal", 76, style="serif")
         + text(38, 216, "Thooriq", 93, style="serif italic")
         + text(42, 267, "Sistem komputer dan praktik Linux.", 22)
-        + text(42, 309, "@rkthooriq", 14, style="mono blue")
+        + text(42, 309, "@rkthooriq", 14, style="mono accent")
     )
     rows = (ROOT / "assets/portrait-rows.txt").read_text(encoding="utf-8").splitlines()
     portrait = "".join(
@@ -89,7 +88,7 @@ def hero():
     )
     portrait = (
         '<g transform="translate(552 28) scale(2.22)" fill="none" '
-        'stroke="#292824" stroke-width=".64" stroke-linecap="round">'
+        f'stroke="{NAVY}" stroke-width=".64" stroke-linecap="round">'
         + portrait + "</g>"
     )
     return svg(880, 345, "Raditya Kemal Thooriq",
@@ -155,12 +154,12 @@ def monthly(days):
         x = round(40 + (index + 0.5) * (533 / len(totals)), 1)
         height = max(3, round(104 * count / ceiling))
         highlight = count > 0 and month == peak_month
-        color = BLUE if highlight else INK if count else "#d8d6cf"
+        color = PEACOCK if highlight else NAVY if count else RULE
         content += animate(rect(round(x - 13, 1), baseline - height, 26, height, color, 3),
                            850 + index * 34, "bar")
         if highlight:
             content += animate(text(x, baseline - height - 9, count, 13,
-                                    style="mono blue", anchor="middle"), 1230)
+                                    style="mono accent", anchor="middle"), 1230)
         content += text(x, 254, MONTHS[month.month - 1], 11, style="mono muted",
                         anchor="middle")
 
@@ -185,28 +184,15 @@ def monthly(days):
                content)
 
 
-def project():
+def project_card(title, description, label):
     content = (
-        rect(39, 30, 8, 8, BLUE, 1)
-        + text(58, 39, "REPO BELAJAR", 12, style="mono muted")
-        + text(38, 79, "Computer Systems Fundamentals", 36, style="serif")
-        + text(39, 111, "Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.",
-               19, style="muted")
-        + text(841, 77, "↗", 28, style="blue", anchor="end")
+        rect(39, 30, 8, 8, PEACOCK, 1)
+        + text(58, 39, label, 12, style="mono muted")
+        + text(38, 79, title, 36, style="serif")
+        + text(39, 111, description, 19, style="muted")
+        + text(841, 77, "↗", 28, style="accent", anchor="end")
     )
-    return svg(880, 137, "Computer Systems Fundamentals", "Repositori catatan belajar dan lab praktik.",
-               animate(content, 1560))
-
-
-def tile(title, lines, background, delay):
-    foreground = "" if background == YELLOW else "white"
-    content = (
-        text(22, 69, title, 38, style=f"serif italic {foreground}")
-        + text(254, 35, "↗", 21, style=foreground, anchor="end")
-        + text(23, 105, lines[0], 17, style=foreground)
-        + text(23, 131, lines[1], 17, style=foreground)
-    )
-    return svg(280, 157, title, " ".join(lines), animate(content, delay), background=background)
+    return svg(880, 137, title, description, animate(content, 1560))
 
 
 def read_days(path):
@@ -225,17 +211,13 @@ def read_days(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=ROOT / "data/contributions.json")
-    parser.add_argument("--output", type=Path, default=ROOT / "cards" / "paper")
+    parser.add_argument("--output", type=Path, default=ROOT / "cards" / "ivory")
     args = parser.parse_args()
     days = read_days(args.data)
     cards = {
         "hero": hero(),
         "calendar": heatmap(days),
         "monthly": monthly(days),
-        "project": project(),
-        "linux": tile("Linux", ("Shell dan izin akses", "Layanan systemd"), BLUE, 1300),
-        "network": tile("Jaringan", ("TCP/IP dan DNS", "Routing dan socket"), RED, 1380),
-        "labs": tile("Lab terminal", ("Eksperimen sistem", "Catat hasil observasi"), YELLOW, 1460),
     }
     args.output.mkdir(parents=True, exist_ok=True)
     for name, content in cards.items():

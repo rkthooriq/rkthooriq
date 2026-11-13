@@ -20,6 +20,12 @@ Pengambilan data menggunakan HTML kalender publik GitHub. Bila struktur HTML ber
 
 Workflow berjalan di branch default setiap hari sekitar pukul 07.23 WIB dan bisa dijalankan manual dari tab **Actions**. Token bawaan Actions hanya dipakai untuk menyimpan perubahan ke repo profil. Pengaturan repo dan aturan branch harus mengizinkan penulisan oleh workflow.
 
+## Repo publik terbaru dan Tech stack
+
+Workflow memilih satu repo publik milik akun berdasarkan waktu push terakhir. Repo profil, fork, dan repo arsip dilewati. Kartu memakai nama serta deskripsi publik. Tech stack menampilkan hingga lima bahasa teratas berdasarkan jumlah byte menurut GitHub. Jika GitHub belum mendeteksi bahasa, README menampilkan keterangan itu. Framework, library, dan alat build tidak diperkirakan dari nama bahasa.
+
+Bagian di antara penanda `featured-repo` diperbarui otomatis, sementara isi di luar penanda dikelola manual. Jalankan **Refresh profile contributions** dari tab **Actions** untuk mengecek repo terbaru tanpa menunggu jadwal harian. Untuk memperbarui bagian ini secara lokal, jalankan `python3 -B scripts/refresh_featured_repo.py`.
+
 ## Menerapkan ke repo profil
 
 Jika repo sudah memiliki README, salin README lama sebagai cadangan dan simpan versi itu di Git sebelum menggantinya. Cek juga apakah repo sudah punya workflow yang memperbarui README atau grafik agar jadwalnya bisa disatukan.

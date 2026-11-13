@@ -24,13 +24,15 @@ jobs:
         run: python3 scripts/fetch_contributions.py rkthooriq
       - name: Render contribution cards
         run: python3 scripts/render_readme_cards.py
-      - name: Commit updated contribution data and cards
+      - name: Refresh the latest public repository and tech stack
+        run: python3 -B scripts/refresh_featured_repo.py
+      - name: Commit updated profile cards
         run: |
-          git add -- data/contributions.json cards/paper/calendar.svg cards/paper/monthly.svg
+          git add -A -- README.md data/contributions.json cards/ivory
           if git diff --cached --quiet; then
             exit 0
           fi
           git -c user.name='github-actions[bot]' \
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-              commit -m "chore: refresh profile contributions"
+              commit -m "chore: refresh profile cards"
           git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
