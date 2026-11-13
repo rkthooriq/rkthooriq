@@ -3,13 +3,14 @@
   <title id="title">Linux</title>
   <desc id="description">Shell dan izin akses Layanan systemd</desc>
   <style>
-    text { font-family: system-ui, sans-serif; fill: #171717; }
+    text { font-family: system-ui, sans-serif; fill: #00293c; }
     .serif { font-family: Georgia, "Times New Roman", serif; }
     .italic { font-style: italic; }
     .mono { font-family: ui-monospace, monospace; letter-spacing: 1px; }
-    .muted { fill: #555452; }
-    .blue { fill: #304bf4; }
-    .white { fill: #fff; }
+    .muted { fill: #45605d; }
+    .accent { fill: #1e656d; }
+    .light { fill: #f1f3ce; }
+    .dark { fill: #101010; }
 
     @media (prefers-reduced-motion: no-preference) {
       .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
@@ -21,6 +22,6 @@
       @keyframes grow { from { transform: scaleY(0); } }
     }
   </style>
-  <rect x="0.5" y="0.5" width="279" height="156" rx="16" fill="#304bf4" stroke="none"/>
-  <g class="enter" style="animation-delay:1300ms"><text x="22" y="69" class="serif italic white" font-size="38" font-weight="400" text-anchor="start">Linux</text><text x="254" y="35" class="white" font-size="21" font-weight="400" text-anchor="end">↗</text><text x="23" y="105" class="white" font-size="17" font-weight="400" text-anchor="start">Shell dan izin akses</text><text x="23" y="131" class="white" font-size="17" font-weight="400" text-anchor="start">Layanan systemd</text></g>
+  <rect x="0.5" y="0.5" width="279" height="156" rx="16" fill="#00293c" stroke="none"/>
+  <g class="enter" style="animation-delay:1300ms"><text x="22" y="69" class="serif italic light" font-size="38" font-weight="400" text-anchor="start">Linux</text><text x="254" y="35" class="light" font-size="21" font-weight="400" text-anchor="end">↗</text><text x="23" y="105" class="light" font-size="17" font-weight="400" text-anchor="start">Shell dan izin akses</text><text x="23" y="131" class="light" font-size="17" font-weight="400" text-anchor="start">Layanan systemd</text></g>
 </svg>
