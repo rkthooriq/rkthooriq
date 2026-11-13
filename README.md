@@ -1,4 +1,4 @@
-<h1><img src="./cards/hero.svg" width="100%" alt="Raditya Kemal Thooriq (@rkthooriq). Catatan belajar sistem komputer dan praktik Linux." /></h1>
+<h1><img src="./cards/hero.svg" width="100%" alt="Raditya Kemal Thooriq (@rkthooriq) dan potret profilnya. Catatan belajar sistem komputer dan praktik Linux." /></h1>
 
 ## Aktivitas GitHub
 
@@ -7,10 +7,12 @@
 
 ## Catatan belajar
 
-<a href="https://github.com/rkthooriq/computer-systems-fundamentals"><img src="./cards/project.svg" width="100%" alt="Computer Systems Fundamentals — catatan belajar dari hardware hingga jaringan, dengan lab praktik." /></a>
-
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals/tree/main/03-linux"><img src="./cards/linux.svg" width="32%" alt="Linux — shell, izin akses, dan systemd." /></a>
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals/tree/main/07-networking"><img src="./cards/network.svg" width="32%" alt="Jaringan — TCP/IP, DNS, dan routing." /></a>
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals/tree/main/09-labs"><img src="./cards/labs.svg" width="32%" alt="Lab terminal — eksperimen dan observasi." /></a>
+
+## Repo unggulan
+
+<a href="https://github.com/rkthooriq/computer-systems-fundamentals"><img src="./cards/project.svg" width="100%" alt="Computer Systems Fundamentals — catatan belajar dari hardware hingga jaringan, dengan lab praktik." /></a>
 
 [Lihat repo publik](https://github.com/rkthooriq?tab=repositories) · [Sumber data kontribusi](https://github.com/rkthooriq#contribution-activity)

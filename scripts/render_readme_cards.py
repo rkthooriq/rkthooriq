@@ -11,14 +11,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATIC = os.environ.get("STATIC") == "1"
 MONTHS = ("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des")
-HEAT = ("#242e35", "#28554f", "#328473", "#47b69c", "#82e3c0")
+PAPER = "#f3f2ee"
+INK = "#171717"
+BLUE = "#304bf4"
+RED = "#c62c24"
+YELLOW = "#ffc71c"
+HEAT = ("#dfe4ff", "#a6b4ff", "#778dff", "#5068ff", BLUE)
 STYLE = """
-    text { font-family: system-ui, sans-serif; fill: #edf3f1; }
-    .mono { font-family: ui-monospace, monospace; letter-spacing: 1.25px; }
-    .muted { fill: #a6b5b9; }
-    .mint { fill: #82e3c0; }
-    .amber { fill: #f3c580; }
-    .blue { fill: #a5c9ff; }
+    text { font-family: system-ui, sans-serif; fill: #171717; }
+    .serif { font-family: Georgia, "Times New Roman", serif; }
+    .italic { font-style: italic; }
+    .mono { font-family: ui-monospace, monospace; letter-spacing: 1px; }
+    .muted { fill: #555452; }
+    .blue { fill: #304bf4; }
+    .white { fill: #fff; }
 """
 MOTION = """
     @media (prefers-reduced-motion: no-preference) {
@@ -43,7 +49,7 @@ def rect(x, y, width, height, fill, radius=0, stroke="none"):
             f'fill="{fill}" stroke="{stroke}"/>')
 
 
-def line(x1, y1, x2, y2, stroke="#303e46"):
+def line(x1, y1, x2, y2, stroke="#d8d6cf"):
     return f'<path d="M{x1} {y1}L{x2} {y2}" fill="none" stroke="{stroke}"/>'
 
 
@@ -53,14 +59,14 @@ def animate(content, delay, kind="enter"):
     return f'<g class="{kind}" style="animation-delay:{delay}ms">{content}</g>'
 
 
-def svg(width, height, title, description, content):
+def svg(width, height, title, description, content, *, background=PAPER):
     style = STYLE if STATIC else STYLE + MOTION
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-labelledby="title description">
   <title id="title">{escape(title)}</title>
   <desc id="description">{escape(description)}</desc>
   <style>{style}  </style>
-  {rect(0.5, 0.5, width - 1, height - 1, "#12191e", 16, "#303e46")}
+  {rect(0.5, 0.5, width - 1, height - 1, background, 16)}
   {content}
 </svg>
 '''
@@ -68,26 +74,27 @@ def svg(width, height, title, description, content):
 
 def hero():
     identity = (
-        text(34, 40, "CATATAN BELAJAR SISTEM", 13, style="mono mint", weight=700)
-        + text(32, 100, "Raditya Kemal", 54, weight=750)
-        + text(32, 157, "Thooriq", 54, weight=750)
-        + text(35, 197, "Sistem komputer dan praktik Linux", 22, style="muted")
-        + text(35, 236, "@rkthooriq", 15, style="mono mint")
+        rect(41, 40, 8, 8, BLUE, 1)
+        + text(62, 49, "CATATAN BELAJAR SISTEM", 12, style="mono muted")
+        + text(36, 135, "Raditya Kemal", 76, style="serif")
+        + text(38, 216, "Thooriq", 93, style="serif italic")
+        + text(42, 267, "Sistem komputer dan praktik Linux.", 22)
+        + text(42, 309, "@rkthooriq", 14, style="mono blue")
     )
-    diagram = rect(598, 31, 248, 206, "#171f25", 10, "#334149")
-    labels = ("Hardware", "Sistem operasi", "Aplikasi")
-    for index, (label, color) in enumerate(zip(labels, (HEAT[4], "#a5c9ff", "#f3c580"))):
-        y = 48 + index * 62
-        node = (
-            rect(620, y, 204, 42, "#202b32", 6)
-            + rect(634, y + 17, 8, 8, color, 2)
-            + text(654, y + 26, label, 15, style="mono")
-        )
-        if index < len(labels) - 1:
-            node += line(639, y + 42, 639, y + 62, "#667981")
-        diagram += animate(node, 180 + index * 110)
-    return svg(880, 268, "Raditya Kemal Thooriq", "Catatan belajar sistem komputer dan praktik Linux.",
-               animate(identity, 0) + diagram)
+    rows = (ROOT / "assets/portrait-rows.txt").read_text(encoding="utf-8").splitlines()
+    portrait = "".join(
+        animate(f'<path d="{escape(row, quote=True)}"/>', 130 + index * 13, "cell")
+        for index, row in enumerate(rows)
+        if row
+    )
+    portrait = (
+        '<g transform="translate(552 28) scale(2.22)" fill="none" '
+        'stroke="#292824" stroke-width=".64" stroke-linecap="round">'
+        + portrait + "</g>"
+    )
+    return svg(880, 345, "Raditya Kemal Thooriq",
+               "Potret dari avatar GitHub dan catatan belajar sistem komputer.",
+               animate(identity, 0) + portrait)
 
 
 def short_date(day):
@@ -101,30 +108,26 @@ def heatmap(days):
     total = sum(days.values())
     end_label = f"{short_date(start)} {start.year} – {short_date(end)} {end.year}"
     content = (
-        text(34, 38, "KONTRIBUSI GITHUB", 13, style="mono mint", weight=700)
-        + text(33, 81, f"{total:,} kontribusi", 37, weight=740)
-        + text(846, 79, end_label, 14, style="mono muted", anchor="end")
-        + line(34, 101, 846, 101)
+        text(39, 54, "Jejak kontribusi", 41, style="serif")
+        + text(841, 48, end_label, 12, style="mono muted", anchor="end")
     )
-    for y, label in ((150, "Sen"), (180, "Rab"), (210, "Jum")):
-        content += text(34, y, label, 12, style="mono muted")
 
     last_label_column = -5
     peak = max(days.values())
     for day, count in days.items():
         week, row = divmod(start_offset + (day - start).days, 7)
-        x, y = 80 + week * 14.5, 126 + row * 15
+        x, y = 41 + week * 15.15, 84 + row * 14.4
         if (day == start or day.day == 1) and week - last_label_column >= 3:
-            content += text(x, 119, MONTHS[day.month - 1], 11, style="mono muted")
+            content += text(x, 201, MONTHS[day.month - 1], 10, style="mono muted")
             last_label_column = week
         shade = 0 if count == 0 else min(4, (4 * count + peak - 1) // peak)
-        content += animate(rect(x, y, 11, 11, HEAT[shade], 2), 420 + week * 11, "cell")
+        content += animate(rect(x, y, 12, 12, HEAT[shade], 2), 420 + week * 11, "cell")
 
-    content += text(678, 257, "Sedikit", 12, style="muted")
+    content += text(669, 226, "Sedikit", 12, style="muted")
     for index, color in enumerate(HEAT):
-        content += rect(728 + index * 15, 247, 11, 11, color, 2)
-    content += text(847, 257, "Banyak", 12, style="muted", anchor="end")
-    return svg(880, 276, "Kalender kontribusi GitHub", f"{total} kontribusi, {end_label} UTC.", content)
+        content += rect(717 + index * 15, 216, 11, 11, color, 2)
+    content += text(841, 226, "Banyak", 12, style="muted", anchor="end")
+    return svg(880, 244, "Kalender kontribusi GitHub", f"{total} kontribusi, {end_label} UTC.", content)
 
 
 def monthly(days):
@@ -140,25 +143,26 @@ def monthly(days):
     peak_month = max(totals, key=totals.get)
     peak_count = totals[peak_month]
     ceiling = max(peak_count, 1)
+    total = sum(days.values())
+    baseline = 230
     content = (
-        text(34, 38, "RINGKASAN AKTIVITAS", 13, style="mono blue", weight=700)
-        + text(33, 77, "Kontribusi per bulan", 32, weight=730)
-        + text(846, 76, "365 HARI", 13, style="mono muted", anchor="end")
-        + line(34, 190, 846, 190)
+        text(40, 41, "365 HARI DI GITHUB", 12, style="mono muted")
+        + text(38, 91, f"{total:,} kontribusi", 51, style="serif italic")
+        + line(40, baseline, 573, baseline)
+        + line(606, 38, 606, 270)
     )
     for index, (month, count) in enumerate(totals.items()):
-        x = 34 + (index + 0.5) * (812 / len(totals))
-        height = round(64 * count / ceiling)
-        color = "#a5c9ff" if count and month == peak_month else "#547b9b"
-        if count:
-            content += animate(rect(round(x - 13, 1), 190 - max(height, 2), 26,
-                                    max(height, 2), color, 3), 850 + index * 34, "bar")
-        if count and month == peak_month:
-            content += animate(text(round(x, 1), 181 - max(height, 2), count, 13,
+        x = round(40 + (index + 0.5) * (533 / len(totals)), 1)
+        height = max(3, round(104 * count / ceiling))
+        highlight = count > 0 and month == peak_month
+        color = BLUE if highlight else INK if count else "#d8d6cf"
+        content += animate(rect(round(x - 13, 1), baseline - height, 26, height, color, 3),
+                           850 + index * 34, "bar")
+        if highlight:
+            content += animate(text(x, baseline - height - 9, count, 13,
                                     style="mono blue", anchor="middle"), 1230)
-        content += text(round(x, 1), 212, MONTHS[month.month - 1], 12, style="mono muted",
+        content += text(x, 254, MONTHS[month.month - 1], 11, style="mono muted",
                         anchor="middle")
-    content += line(34, 233, 846, 233)
 
     peak = days[peak_day]
     peak_label = f"{short_date(peak_day)} · {peak:,}" if peak else "—"
@@ -168,37 +172,41 @@ def monthly(days):
         ("Hari tersibuk", peak_label),
     )
     for index, (label, value) in enumerate(metrics):
-        x = 34 + index * 270
-        content += text(x, 260, label, 14, style="muted")
-        content += text(x, 290, value, 25, weight=720)
+        y = 74 + index * 77
+        content += text(633, y, value, 39, style="serif")
+        content += text(634, y + 24, label, 14, style="muted")
+        if index < len(metrics) - 1:
+            content += line(633, y + 38, 840, y + 38)
 
-    return svg(880, 313, "Kontribusi per bulan",
-               f"{active} hari aktif. Rentetan terpanjang {longest} hari. "
-               f"Hari tersibuk {peak_label}. Bulan di ujung grafik dapat berupa bulan parsial.",
+    return svg(880, 290, "Kontribusi per bulan",
+               f"{total} kontribusi dalam 365 hari. {active} hari aktif. "
+               f"Rentetan terpanjang {longest} hari. Hari tersibuk {peak_label}. "
+               "Bulan di ujung grafik dapat berupa bulan parsial.",
                content)
 
 
 def project():
     content = (
-        text(34, 35, "REPO BELAJAR", 13, style="mono amber", weight=700)
-        + text(33, 77, "Computer Systems Fundamentals", 37, weight=730)
-        + text(34, 109, "Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.",
+        rect(39, 30, 8, 8, BLUE, 1)
+        + text(58, 39, "REPO BELAJAR", 12, style="mono muted")
+        + text(38, 79, "Computer Systems Fundamentals", 36, style="serif")
+        + text(39, 111, "Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.",
                19, style="muted")
-        + text(846, 76, "↗", 32, style="amber", anchor="end")
+        + text(841, 77, "↗", 28, style="blue", anchor="end")
     )
     return svg(880, 137, "Computer Systems Fundamentals", "Repositori catatan belajar dan lab praktik.",
-               animate(content, 1240))
+               animate(content, 1560))
 
 
-def tile(title, lines, accent, delay):
+def tile(title, lines, background, delay):
+    foreground = "" if background == YELLOW else "white"
     content = (
-        rect(20, 23, 26, 3, {"mint": HEAT[4], "blue": "#a5c9ff", "amber": "#f3c580"}[accent], 1)
-        + text(20, 62, title, 33, weight=730)
-        + text(254, 61, "↗", 24, style=accent, anchor="end")
-        + text(20, 91, lines[0], 20, style="muted")
-        + text(20, 116, lines[1], 20, style="muted")
+        text(22, 69, title, 38, style=f"serif italic {foreground}")
+        + text(254, 35, "↗", 21, style=foreground, anchor="end")
+        + text(23, 105, lines[0], 17, style=foreground)
+        + text(23, 131, lines[1], 17, style=foreground)
     )
-    return svg(280, 137, title, " ".join(lines), animate(content, delay))
+    return svg(280, 157, title, " ".join(lines), animate(content, delay), background=background)
 
 
 def read_days(path):
@@ -225,9 +233,9 @@ def main():
         "calendar": heatmap(days),
         "monthly": monthly(days),
         "project": project(),
-        "linux": tile("Linux", ("Shell dan izin akses", "Layanan systemd"), "mint", 1360),
-        "network": tile("Jaringan", ("TCP/IP dan DNS", "Routing dan socket"), "blue", 1450),
-        "labs": tile("Lab terminal", ("Eksperimen sistem", "Catat hasil observasi"), "amber", 1540),
+        "linux": tile("Linux", ("Shell dan izin akses", "Layanan systemd"), BLUE, 1300),
+        "network": tile("Jaringan", ("TCP/IP dan DNS", "Routing dan socket"), RED, 1380),
+        "labs": tile("Lab terminal", ("Eksperimen sistem", "Catat hasil observasi"), YELLOW, 1460),
     }
     args.output.mkdir(parents=True, exist_ok=True)
     for name, content in cards.items():
