@@ -9,11 +9,11 @@
 
 ## Repo publik terbaru
 
-<a href="https://github.com/rkthooriq/computer-systems-fundamentals"><img src="./cards/ivory/latest-project-8eda2be6c0a9d936.svg" width="100%" alt="computer-systems-fundamentals — A personal learning repository for understanding computer…" /></a>
+<a href="https://github.com/rkthooriq/SeismoPass"><img src="./cards/ivory/latest-project-21ee6693bb67dd9b.svg" width="100%" alt="SeismoPass — Platform pencatatan bangunan dan tindak lanjut screening awal RVS" /></a>
 
 ## Tech stack
 
-GitHub belum mendeteksi bahasa pada repo ini.
+<code>TypeScript</code> · <code>CSS</code> · <code>JavaScript</code> · <code>HTML</code> · <code>Dockerfile</code>
 
 <!-- featured-repo:end -->
 
