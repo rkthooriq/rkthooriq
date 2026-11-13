@@ -10,7 +10,6 @@
     .muted { fill: #45605d; }
     .accent { fill: #1e656d; }
     .light { fill: #f1f3ce; }
-    .dark { fill: #101010; }
 
     @media (prefers-reduced-motion: no-preference) {
       .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
@@ -22,6 +21,6 @@
       @keyframes grow { from { transform: scaleY(0); } }
     }
   </style>
-  <rect x="0.5" y="0.5" width="279" height="156" rx="16" fill="#f62a00" stroke="none"/>
-  <g class="enter" style="animation-delay:1460ms"><text x="22" y="69" class="serif italic dark" font-size="38" font-weight="400" text-anchor="start">Lab terminal</text><text x="254" y="35" class="dark" font-size="21" font-weight="400" text-anchor="end">↗</text><text x="23" y="105" class="dark" font-size="17" font-weight="400" text-anchor="start">Eksperimen sistem</text><text x="23" y="131" class="dark" font-size="17" font-weight="400" text-anchor="start">Catat hasil observasi</text></g>
+  <rect x="0.5" y="0.5" width="279" height="156" rx="16" fill="#00293c" stroke="none"/>
+  <g class="enter" style="animation-delay:1460ms"><text x="22" y="69" class="serif italic light" font-size="38" font-weight="400" text-anchor="start">Lab terminal</text><text x="254" y="35" class="light" font-size="21" font-weight="400" text-anchor="end">↗</text><text x="23" y="105" class="light" font-size="17" font-weight="400" text-anchor="start">Eksperimen sistem</text><text x="23" y="131" class="light" font-size="17" font-weight="400" text-anchor="start">Catat hasil observasi</text></g>
 </svg>

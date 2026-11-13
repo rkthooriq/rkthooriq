@@ -14,7 +14,6 @@ MONTHS = ("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", 
 IVORY = "#f1f3ce"
 NAVY = "#00293c"
 PEACOCK = "#1e656d"
-CANDY = "#f62a00"
 RULE = "#cbd5b6"
 HEAT = ("#dce5c8", "#9dbfb0", "#659e97", "#387e80", PEACOCK)
 STYLE = f"""
@@ -25,7 +24,6 @@ STYLE = f"""
     .muted {{ fill: #45605d; }}
     .accent {{ fill: {PEACOCK}; }}
     .light {{ fill: {IVORY}; }}
-    .dark {{ fill: #101010; }}
 """
 MOTION = """
     @media (prefers-reduced-motion: no-preference) {
@@ -199,12 +197,12 @@ def project():
                animate(content, 1560))
 
 
-def tile(title, lines, background, foreground, delay):
+def tile(title, lines, background, delay):
     content = (
-        text(22, 69, title, 38, style=f"serif italic {foreground}")
-        + text(254, 35, "↗", 21, style=foreground, anchor="end")
-        + text(23, 105, lines[0], 17, style=foreground)
-        + text(23, 131, lines[1], 17, style=foreground)
+        text(22, 69, title, 38, style="serif italic light")
+        + text(254, 35, "↗", 21, style="light", anchor="end")
+        + text(23, 105, lines[0], 17, style="light")
+        + text(23, 131, lines[1], 17, style="light")
     )
     return svg(280, 157, title, " ".join(lines), animate(content, delay), background=background)
 
@@ -233,9 +231,9 @@ def main():
         "calendar": heatmap(days),
         "monthly": monthly(days),
         "project": project(),
-        "linux": tile("Linux", ("Shell dan izin akses", "Layanan systemd"), NAVY, "light", 1300),
-        "network": tile("Jaringan", ("TCP/IP dan DNS", "Routing dan socket"), PEACOCK, "light", 1380),
-        "labs": tile("Lab terminal", ("Eksperimen sistem", "Catat hasil observasi"), CANDY, "dark", 1460),
+        "linux": tile("Linux", ("Shell dan izin akses", "Layanan systemd"), NAVY, 1300),
+        "network": tile("Jaringan", ("TCP/IP dan DNS", "Routing dan socket"), PEACOCK, 1380),
+        "labs": tile("Lab terminal", ("Eksperimen sistem", "Catat hasil observasi"), NAVY, 1460),
     }
     args.output.mkdir(parents=True, exist_ok=True)
     for name, content in cards.items():

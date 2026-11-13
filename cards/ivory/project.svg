@@ -10,7 +10,6 @@
     .muted { fill: #45605d; }
     .accent { fill: #1e656d; }
     .light { fill: #f1f3ce; }
-    .dark { fill: #101010; }
 
     @media (prefers-reduced-motion: no-preference) {
       .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
