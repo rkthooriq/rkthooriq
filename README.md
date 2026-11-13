@@ -11,6 +11,8 @@
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals/tree/main/07-networking"><img src="./cards/ivory/network.svg" width="32%" alt="Jaringan — TCP/IP, DNS, dan routing." /></a>
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals/tree/main/09-labs"><img src="./cards/ivory/labs.svg" width="32%" alt="Lab terminal — eksperimen dan observasi." /></a>
 
+[Cheatsheet perintah](https://github.com/rkthooriq/computer-systems-fundamentals/blob/main/CHEATSHEET.md) · [Glosarium](https://github.com/rkthooriq/computer-systems-fundamentals/blob/main/GLOSSARY.md)
+
 ## Repo unggulan
 
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals"><img src="./cards/ivory/project.svg" width="100%" alt="Computer Systems Fundamentals — catatan belajar dari hardware hingga jaringan, dengan lab praktik." /></a>
