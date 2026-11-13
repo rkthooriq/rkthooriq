@@ -71,6 +71,32 @@ def svg(width, height, title, description, content, *, background=IVORY):
 '''
 
 
+def hero_landscape():
+    motion = "" if STATIC else """
+      <style>
+        @media (prefers-reduced-motion: no-preference) {
+          .cloud { animation: cloud-drift 4.6s ease-out both; }
+          .cloud-distant { animation-name: cloud-drift-distant; }
+          @keyframes cloud-drift { from { transform: translateX(-34px); } }
+          @keyframes cloud-drift-distant { from { transform: translateX(-19px); } }
+        }
+      </style>
+    """.strip()
+    return f'''<g aria-hidden="true">{motion}
+      <path class="cloud" d="M510 66h101c-3-8-11-12-20-10
+        -4-12-20-16-30-7-8-7-22-4-26 6-12-2-22 2-25 11Z"
+        fill="#e1e8c5" stroke="#c7d7b6"/>
+      <path class="cloud cloud-distant" d="M756 105h91c-3-7-11-10-20-9
+        -5-11-18-14-28-7-10-6-21-2-24 7-9-1-15 2-19 9Z"
+        fill="#e1e8c5" stroke="#c7d7b6"/>
+      <path d="M472 317c55-18 95-17 138-31s79-24 132-5 77 22 104 13
+        v23Z" fill="#e2e9c8"/>
+      <path d="M472 317c55-18 95-17 138-31s79-24 132-5 77 22 104 13"
+        fill="none" stroke="#c7d7b6" stroke-linecap="round"/>
+      <path d="M560 317c49-7 86-23 131-22s95 17 155 14v8Z" fill="#d4e2bf"/>
+    </g>'''
+
+
 def hero():
     identity = (
         rect(41, 40, 8, 8, PEACOCK, 1)
@@ -93,7 +119,7 @@ def hero():
     )
     return svg(880, 345, "Raditya Kemal Thooriq",
                "Potret dari avatar GitHub dan catatan belajar sistem komputer.",
-               animate(identity, 0) + portrait)
+               hero_landscape() + animate(identity, 0) + portrait)
 
 
 def short_date(day):
