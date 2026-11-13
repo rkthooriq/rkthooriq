@@ -17,4 +17,7 @@
 
 <a href="https://github.com/rkthooriq/computer-systems-fundamentals"><img src="./cards/ivory/project.svg" width="100%" alt="Computer Systems Fundamentals — catatan belajar dari hardware hingga jaringan, dengan lab praktik." /></a>
 
+<!-- featured-repo:start -->
+<!-- featured-repo:end -->
+
 [Lihat repo publik](https://github.com/rkthooriq?tab=repositories) · [Sumber data kontribusi](https://github.com/rkthooriq#contribution-activity)

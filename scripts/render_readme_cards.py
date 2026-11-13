@@ -184,17 +184,23 @@ def monthly(days):
                content)
 
 
-def project():
+def project_card(title, description, label):
     content = (
         rect(39, 30, 8, 8, PEACOCK, 1)
-        + text(58, 39, "REPO BELAJAR", 12, style="mono muted")
-        + text(38, 79, "Computer Systems Fundamentals", 36, style="serif")
-        + text(39, 111, "Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.",
-               19, style="muted")
+        + text(58, 39, label, 12, style="mono muted")
+        + text(38, 79, title, 36, style="serif")
+        + text(39, 111, description, 19, style="muted")
         + text(841, 77, "↗", 28, style="accent", anchor="end")
     )
-    return svg(880, 137, "Computer Systems Fundamentals", "Repositori catatan belajar dan lab praktik.",
-               animate(content, 1560))
+    return svg(880, 137, title, description, animate(content, 1560))
+
+
+def project():
+    return project_card(
+        "Computer Systems Fundamentals",
+        "Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.",
+        "REPO BELAJAR",
+    )
 
 
 def tile(title, lines, background, delay):

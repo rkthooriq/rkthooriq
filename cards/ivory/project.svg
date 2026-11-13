@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="880" height="137"
      viewBox="0 0 880 137" role="img" aria-labelledby="title description">
   <title id="title">Computer Systems Fundamentals</title>
-  <desc id="description">Repositori catatan belajar dan lab praktik.</desc>
+  <desc id="description">Dari hardware dan sistem operasi hingga jaringan, dengan lab terminal.</desc>
   <style>
     text { font-family: system-ui, sans-serif; fill: #00293c; }
     .serif { font-family: Georgia, "Times New Roman", serif; }
