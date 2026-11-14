@@ -77,7 +77,7 @@ def hero():
         + text(62, 49, "DATA & CLOUD ENTHUSIAST", 12, style="mono muted")
         + text(36, 135, "Raditya Kemal", 76, style="serif")
         + text(38, 216, "Thooriq", 93, style="serif italic")
-        + text(42, 267, "Always learning, always seeing how far I can go.", 22,
+        + text(42, 267, "A lifelong learner, driven by curiosity.", 22,
                style="serif italic")
         + text(42, 309, "@rkthooriq", 14, style="mono accent")
     )
@@ -93,7 +93,7 @@ def hero():
         + portrait + "</g>"
     )
     return svg(880, 345, "Raditya Kemal Thooriq",
-               "Data & Cloud Enthusiast. Always learning, always seeing how far I can go.",
+               "Data & Cloud Enthusiast. A lifelong learner, driven by curiosity.",
                animate(identity, 0) + portrait)
 
 
