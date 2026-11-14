@@ -5,8 +5,7 @@
 <a href="https://github.com/rkthooriq#contribution-activity"><img src="./cards/ivory/calendar.svg" width="100%" alt="Kalender kontribusi GitHub. Buka profil untuk melihat data per hari." /></a>
 <img src="./cards/ivory/monthly.svg" width="100%" alt="Ringkasan kontribusi per bulan, hari aktif, rentetan terpanjang, dan hari tersibuk." />
 
-<img src="./cards/ivory/github-stats.svg" width="48%" alt="GitHub Stats — kontribusi dan hari aktif selama 365 hari, jumlah repo proyek publik, dan bintang." />
-<img src="./cards/ivory/most-used-languages.svg" width="48%" alt="Most Used Languages — persentase bahasa berdasarkan ukuran kode di repo proyek publik." />
+<img src="./cards/ivory/github-overview.svg" width="100%" alt="GitHub Stats dan Most Used Languages — kontribusi, hari aktif, repo publik, bintang, dan persentase bahasa." />
 
 <!-- featured-repo:start -->
 
