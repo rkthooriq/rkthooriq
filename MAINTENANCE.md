@@ -29,3 +29,7 @@ Bagian di antara penanda `featured-repo` diperbarui otomatis, sementara isi di l
 ## Menerapkan ke repo profil
 
 Jika repo sudah memiliki README, salin README lama sebagai cadangan dan simpan versi itu di Git sebelum menggantinya. Cek juga apakah repo sudah punya workflow yang memperbarui README atau grafik agar jadwalnya bisa disatukan.
+
+## GitHub Stats dan Most Used Languages
+
+Kedua kartu diperbarui oleh workflow yang sama. Stats memakai snapshot 365 hari untuk kontribusi dan hari aktif, serta daftar repo proyek publik untuk jumlah repo dan bintang. Most Used Languages menjumlahkan byte kode per bahasa di repo proyek publik. Cakupannya mengikuti filter kartu proyek, yang melewati repo profil, fork, dan arsip. Tech stack tetap mengikuti repo publik terbaru.

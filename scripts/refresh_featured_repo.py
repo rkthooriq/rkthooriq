@@ -2,12 +2,14 @@
 
 import hashlib
 import json
+from collections import Counter
 from html import escape
 from textwrap import shorten
 from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
-from render_readme_cards import ROOT, project_card
+from render_readme_cards import (HEAT, NAVY, PEACOCK, ROOT, animate, line,
+                                 project_card, read_days, rect, svg, text)
 
 OWNER = "rkthooriq"
 API = "https://api.github.com"
@@ -25,7 +27,7 @@ def github_json(path):
         return json.load(response)
 
 
-def latest_public_repo(owner):
+def public_projects(owner):
     page = 1
     while True:
         query = urlencode({"type": "owner", "sort": "pushed", "direction": "desc",
@@ -36,16 +38,69 @@ def latest_public_repo(owner):
                     and repo["owner"]["login"].casefold() == owner.casefold()
                     and repo["name"].casefold() != owner.casefold()
                     and not repo["fork"] and not repo["archived"]):
-                return repo
+                yield repo
         if len(repos) < 100:
-            return None
+            return
         page += 1
 
 
-def top_languages(repo):
+def repository_languages(repo):
     name = quote(repo["name"], safe="")
-    sizes = github_json(f"/repos/{OWNER}/{name}/languages")
-    return sorted(sizes, key=lambda language: (-sizes[language], language.casefold()))[:5]
+    return github_json(f"/repos/{OWNER}/{name}/languages")
+
+
+def ranked_languages(sizes):
+    return sorted((name for name in sizes if sizes[name] > 0),
+                  key=lambda name: (-sizes[name], name.casefold()))
+
+
+def stats_card(repos, days):
+    metrics = (
+        ("Kontribusi · 365 hari", sum(days.values())),
+        ("Hari aktif · 365 hari", sum(count > 0 for count in days.values())),
+        ("Repo proyek publik", len(repos)),
+        ("Bintang di repo proyek", sum(repo["stargazers_count"] for repo in repos)),
+    )
+    content = text(26, 51, "GitHub Stats", 36, style="serif")
+    for index, (label, value) in enumerate(metrics):
+        y = 93 + index * 36
+        content += text(27, y, label, 17, style="muted")
+        content += text(400, y, f"{value:,}", 22, style="serif", anchor="end")
+        if index < len(metrics) - 1:
+            content += line(27, y + 12, 400, y + 12)
+    description = ". ".join(f"{label}: {value}" for label, value in metrics)
+    return svg(426, 230, "GitHub Stats", description, animate(content, 150))
+
+
+def languages_card(sizes):
+    names = ranked_languages(sizes)
+    top = [(name, sizes[name]) for name in names[:5]]
+    other = sum(sizes[name] for name in names[5:])
+    if other:
+        top.append(("Lainnya", other))
+
+    content = text(26, 51, "Most Used Languages", 34, style="serif")
+    description = "GitHub belum mendeteksi bahasa."
+    if top:
+        total = sum(count for _, count in top)
+        palette = (NAVY, PEACOCK, HEAT[3], HEAT[2], HEAT[1], HEAT[0])
+        x = 27
+        legend = []
+        for index, (name, count) in enumerate(top):
+            color = palette[index]
+            width = 372 * count / total
+            content += rect(round(x, 2), 70, round(width, 2), 12, color)
+            x += width
+            y = 110 + index * 18
+            percent = f"{100 * count / total:.1f}%"
+            content += rect(27, y - 10, 9, 9, color, 2)
+            content += text(45, y, shorten(name, width=33, placeholder="…"), 14)
+            content += text(399, y, percent, 14, style="mono", anchor="end")
+            legend.append(f"{name} {percent}")
+        description = "Persentase byte kode pada repo proyek publik. " + ", ".join(legend)
+    else:
+        content += text(27, 104, description, 16, style="muted")
+    return svg(426, 230, "Most Used Languages", description, animate(content, 240))
 
 
 def update_readme(readme_path, card_dir, repo, languages):
@@ -89,9 +144,20 @@ def update_readme(readme_path, card_dir, repo, languages):
 
 
 def main():
-    repo = latest_public_repo(OWNER)
-    languages = top_languages(repo) if repo else []
-    update_readme(ROOT / "README.md", ROOT / "cards/ivory", repo, languages)
+    repos = list(public_projects(OWNER))
+    repo = repos[0] if repos else None
+    project_sizes = [repository_languages(project) for project in repos]
+    languages = ranked_languages(project_sizes[0])[:5] if project_sizes else []
+    total_sizes = Counter()
+    for sizes in project_sizes:
+        total_sizes.update(sizes)
+
+    cards = ROOT / "cards/ivory"
+    days = read_days(ROOT / "data/contributions.json")
+    update_readme(ROOT / "README.md", cards, repo, languages)
+    cards.mkdir(parents=True, exist_ok=True)
+    (cards / "github-stats.svg").write_text(stats_card(repos, days), encoding="utf-8")
+    (cards / "most-used-languages.svg").write_text(languages_card(total_sizes), encoding="utf-8")
     print(f"Latest public project: {repo['name']}" if repo else "No public project found.")
 
 

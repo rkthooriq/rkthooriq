@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="426" height="230"
+     viewBox="0 0 426 230" role="img" aria-labelledby="title description">
+  <title id="title">Most Used Languages</title>
+  <desc id="description">Persentase byte kode pada repo proyek publik. TypeScript 58.5%, CSS 30.3%, JavaScript 10.3%, HTML 0.8%</desc>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #00293c; }
+    .serif { font-family: Georgia, "Times New Roman", serif; }
+    .italic { font-style: italic; }
+    .mono { font-family: ui-monospace, monospace; letter-spacing: 1px; }
+    .muted { fill: #45605d; }
+    .accent { fill: #1e656d; }
+    .light { fill: #f1f3ce; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
+      .cell { animation: reveal 420ms ease-out both; }
+      .bar { animation: grow 520ms ease-out both; transform-origin: center bottom;
+             transform-box: fill-box; }
+      @keyframes enter { from { opacity: 0; transform: translateY(8px); } }
+      @keyframes reveal { from { opacity: 0; } }
+      @keyframes grow { from { transform: scaleY(0); } }
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="425" height="229" rx="16" fill="#f1f3ce" stroke="none"/>
+  <g class="enter" style="animation-delay:240ms"><text x="26" y="51" class="serif" font-size="34" font-weight="400" text-anchor="start">Most Used Languages</text><rect x="27" y="70" width="217.77" height="12" rx="0" fill="#00293c" stroke="none"/><rect x="27" y="100" width="9" height="9" rx="2" fill="#00293c" stroke="none"/><text x="45" y="110" class="" font-size="14" font-weight="400" text-anchor="start">TypeScript</text><text x="399" y="110" class="mono" font-size="14" font-weight="400" text-anchor="end">58.5%</text><rect x="244.77" y="70" width="112.84" height="12" rx="0" fill="#1e656d" stroke="none"/><rect x="27" y="118" width="9" height="9" rx="2" fill="#1e656d" stroke="none"/><text x="45" y="128" class="" font-size="14" font-weight="400" text-anchor="start">CSS</text><text x="399" y="128" class="mono" font-size="14" font-weight="400" text-anchor="end">30.3%</text><rect x="357.61" y="70" width="38.35" height="12" rx="0" fill="#387e80" stroke="none"/><rect x="27" y="136" width="9" height="9" rx="2" fill="#387e80" stroke="none"/><text x="45" y="146" class="" font-size="14" font-weight="400" text-anchor="start">JavaScript</text><text x="399" y="146" class="mono" font-size="14" font-weight="400" text-anchor="end">10.3%</text><rect x="395.96" y="70" width="3.04" height="12" rx="0" fill="#659e97" stroke="none"/><rect x="27" y="154" width="9" height="9" rx="2" fill="#659e97" stroke="none"/><text x="45" y="164" class="" font-size="14" font-weight="400" text-anchor="start">HTML</text><text x="399" y="164" class="mono" font-size="14" font-weight="400" text-anchor="end">0.8%</text></g>
+</svg>

@@ -5,6 +5,9 @@
 <a href="https://github.com/rkthooriq#contribution-activity"><img src="./cards/ivory/calendar.svg" width="100%" alt="Kalender kontribusi GitHub. Buka profil untuk melihat data per hari." /></a>
 <img src="./cards/ivory/monthly.svg" width="100%" alt="Ringkasan kontribusi per bulan, hari aktif, rentetan terpanjang, dan hari tersibuk." />
 
+<img src="./cards/ivory/github-stats.svg" width="48%" alt="GitHub Stats — kontribusi dan hari aktif selama 365 hari, jumlah repo proyek publik, dan bintang." />
+<img src="./cards/ivory/most-used-languages.svg" width="48%" alt="Most Used Languages — persentase bahasa berdasarkan ukuran kode di repo proyek publik." />
+
 <!-- featured-repo:start -->
 
 ## Repo publik terbaru
@@ -13,7 +16,7 @@
 
 ## Tech stack
 
-<code>TypeScript</code> · <code>CSS</code> · <code>JavaScript</code> · <code>HTML</code> · <code>Dockerfile</code>
+<code>TypeScript</code> · <code>CSS</code> · <code>JavaScript</code> · <code>HTML</code>
 
 <!-- featured-repo:end -->
 

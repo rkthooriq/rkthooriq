@@ -24,7 +24,7 @@ jobs:
         run: python3 scripts/fetch_contributions.py rkthooriq
       - name: Render contribution cards
         run: python3 scripts/render_readme_cards.py
-      - name: Refresh the latest public repository and tech stack
+      - name: Refresh project, stats, and language cards
         run: python3 -B scripts/refresh_featured_repo.py
       - name: Commit updated profile cards
         run: |
