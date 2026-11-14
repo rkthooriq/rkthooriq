@@ -8,7 +8,7 @@ from textwrap import shorten
 from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
-from render_readme_cards import (HEAT, NAVY, PEACOCK, ROOT, animate, line,
+from render_readme_cards import (HEAT, IVORY, NAVY, PEACOCK, ROOT, animate, line,
                                  project_card, read_days, rect, svg, text)
 
 OWNER = "rkthooriq"
@@ -54,7 +54,7 @@ def ranked_languages(sizes):
                   key=lambda name: (-sizes[name], name.casefold()))
 
 
-def stats_card(repos, days):
+def stats_panel(repos, days):
     metrics = (
         ("Kontribusi · 365 hari", sum(days.values())),
         ("Hari aktif · 365 hari", sum(count > 0 for count in days.values())),
@@ -69,10 +69,10 @@ def stats_card(repos, days):
         if index < len(metrics) - 1:
             content += line(27, y + 12, 400, y + 12)
     description = ". ".join(f"{label}: {value}" for label, value in metrics)
-    return svg(426, 230, "GitHub Stats", description, animate(content, 150))
+    return animate(content, 150), description
 
 
-def languages_card(sizes):
+def languages_panel(sizes):
     names = ranked_languages(sizes)
     top = [(name, sizes[name]) for name in names[:5]]
     other = sum(sizes[name] for name in names[5:])
@@ -100,7 +100,16 @@ def languages_card(sizes):
         description = "Persentase byte kode pada repo proyek publik. " + ", ".join(legend)
     else:
         content += text(27, 104, description, 16, style="muted")
-    return svg(426, 230, "Most Used Languages", description, animate(content, 240))
+    return animate(content, 240), description
+
+
+def overview_card(repos, days, sizes):
+    stats, stats_description = stats_panel(repos, days)
+    languages, languages_description = languages_panel(sizes)
+    panel = rect(0.5, 0.5, 425, 229, IVORY, 16)
+    content = panel + stats + f'<g transform="translate(454 0)">{panel}{languages}</g>'
+    return svg(880, 230, "GitHub Stats dan Most Used Languages",
+               f"{stats_description}. {languages_description}", content, background="none")
 
 
 def update_readme(readme_path, card_dir, repo, languages):
@@ -156,8 +165,8 @@ def main():
     days = read_days(ROOT / "data/contributions.json")
     update_readme(ROOT / "README.md", cards, repo, languages)
     cards.mkdir(parents=True, exist_ok=True)
-    (cards / "github-stats.svg").write_text(stats_card(repos, days), encoding="utf-8")
-    (cards / "most-used-languages.svg").write_text(languages_card(total_sizes), encoding="utf-8")
+    (cards / "github-overview.svg").write_text(overview_card(repos, days, total_sizes),
+                                              encoding="utf-8")
     print(f"Latest public project: {repo['name']}" if repo else "No public project found.")
 
 
