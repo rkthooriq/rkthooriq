@@ -1,4 +1,4 @@
-<h1><img src="./cards/ivory/hero.svg" width="100%" alt="Raditya Kemal Thooriq (@rkthooriq) dan potret profilnya. Catatan belajar sistem komputer dan praktik Linux." /></h1>
+<h1><img src="./cards/ivory/hero-data-cloud.svg" width="100%" alt="Raditya Kemal Thooriq (@rkthooriq) dan potret profilnya. Data &amp; Cloud Enthusiast. Always learning, always seeing how far I can go." /></h1>
 
 ## Aktivitas GitHub
 

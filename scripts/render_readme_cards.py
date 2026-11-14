@@ -74,10 +74,11 @@ def svg(width, height, title, description, content, *, background=IVORY):
 def hero():
     identity = (
         rect(41, 40, 8, 8, PEACOCK, 1)
-        + text(62, 49, "CATATAN BELAJAR SISTEM", 12, style="mono muted")
+        + text(62, 49, "DATA & CLOUD ENTHUSIAST", 12, style="mono muted")
         + text(36, 135, "Raditya Kemal", 76, style="serif")
         + text(38, 216, "Thooriq", 93, style="serif italic")
-        + text(42, 267, "Sistem komputer dan praktik Linux.", 22)
+        + text(42, 267, "Always learning, always seeing how far I can go.", 22,
+               style="serif italic")
         + text(42, 309, "@rkthooriq", 14, style="mono accent")
     )
     rows = (ROOT / "assets/portrait-rows.txt").read_text(encoding="utf-8").splitlines()
@@ -92,7 +93,7 @@ def hero():
         + portrait + "</g>"
     )
     return svg(880, 345, "Raditya Kemal Thooriq",
-               "Potret dari avatar GitHub dan catatan belajar sistem komputer.",
+               "Data & Cloud Enthusiast. Always learning, always seeing how far I can go.",
                animate(identity, 0) + portrait)
 
 
@@ -215,7 +216,7 @@ def main():
     args = parser.parse_args()
     days = read_days(args.data)
     cards = {
-        "hero": hero(),
+        "hero-data-cloud": hero(),
         "calendar": heatmap(days),
         "monthly": monthly(days),
     }
