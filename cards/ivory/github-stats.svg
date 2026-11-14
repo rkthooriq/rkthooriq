@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="426" height="230"
+     viewBox="0 0 426 230" role="img" aria-labelledby="title description">
+  <title id="title">GitHub Stats</title>
+  <desc id="description">Kontribusi · 365 hari: 54. Hari aktif · 365 hari: 14. Repo proyek publik: 2. Bintang di repo proyek: 1</desc>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #00293c; }
+    .serif { font-family: Georgia, "Times New Roman", serif; }
+    .italic { font-style: italic; }
+    .mono { font-family: ui-monospace, monospace; letter-spacing: 1px; }
+    .muted { fill: #45605d; }
+    .accent { fill: #1e656d; }
+    .light { fill: #f1f3ce; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .enter { animation: enter 520ms cubic-bezier(.2,.65,.3,1) both; }
+      .cell { animation: reveal 420ms ease-out both; }
+      .bar { animation: grow 520ms ease-out both; transform-origin: center bottom;
+             transform-box: fill-box; }
+      @keyframes enter { from { opacity: 0; transform: translateY(8px); } }
+      @keyframes reveal { from { opacity: 0; } }
+      @keyframes grow { from { transform: scaleY(0); } }
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="425" height="229" rx="16" fill="#f1f3ce" stroke="none"/>
+  <g class="enter" style="animation-delay:150ms"><text x="26" y="51" class="serif" font-size="36" font-weight="400" text-anchor="start">GitHub Stats</text><text x="27" y="93" class="muted" font-size="17" font-weight="400" text-anchor="start">Kontribusi · 365 hari</text><text x="400" y="93" class="serif" font-size="22" font-weight="400" text-anchor="end">54</text><path d="M27 105L400 105" fill="none" stroke="#cbd5b6"/><text x="27" y="129" class="muted" font-size="17" font-weight="400" text-anchor="start">Hari aktif · 365 hari</text><text x="400" y="129" class="serif" font-size="22" font-weight="400" text-anchor="end">14</text><path d="M27 141L400 141" fill="none" stroke="#cbd5b6"/><text x="27" y="165" class="muted" font-size="17" font-weight="400" text-anchor="start">Repo proyek publik</text><text x="400" y="165" class="serif" font-size="22" font-weight="400" text-anchor="end">2</text><path d="M27 177L400 177" fill="none" stroke="#cbd5b6"/><text x="27" y="201" class="muted" font-size="17" font-weight="400" text-anchor="start">Bintang di repo proyek</text><text x="400" y="201" class="serif" font-size="22" font-weight="400" text-anchor="end">1</text></g>
+</svg>
