@@ -11,19 +11,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STATIC = os.environ.get("STATIC") == "1"
 MONTHS = ("Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des")
-IVORY = "#f1f3ce"
-NAVY = "#00293c"
-PEACOCK = "#1e656d"
-RULE = "#cbd5b6"
-HEAT = ("#dce5c8", "#9dbfb0", "#659e97", "#387e80", PEACOCK)
+CARD_DIR = ROOT / "cards" / "lime"
+BLACK = "#000000"
+WHITE = "#f2f2f2"
+LIME = "#ccff00"
+GRAY = "#999999"
+RULE = "#333333"
+HEAT = ("#242424", "#545d35", "#788b37", "#a1c52b", LIME)
 STYLE = f"""
-    text {{ font-family: system-ui, sans-serif; fill: {NAVY}; }}
+    text {{ font-family: system-ui, sans-serif; fill: {WHITE}; }}
     .serif {{ font-family: Georgia, "Times New Roman", serif; }}
     .italic {{ font-style: italic; }}
     .mono {{ font-family: ui-monospace, monospace; letter-spacing: 1px; }}
-    .muted {{ fill: #45605d; }}
-    .accent {{ fill: {PEACOCK}; }}
-    .light {{ fill: {IVORY}; }}
+    .muted {{ fill: {GRAY}; }}
+    .accent {{ fill: {LIME}; }}
 """
 MOTION = """
     @media (prefers-reduced-motion: no-preference) {
@@ -58,14 +59,14 @@ def animate(content, delay, kind="enter"):
     return f'<g class="{kind}" style="animation-delay:{delay}ms">{content}</g>'
 
 
-def svg(width, height, title, description, content, *, background=IVORY):
+def svg(width, height, title, description, content, *, background=BLACK):
     style = STYLE if STATIC else STYLE + MOTION
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"
      viewBox="0 0 {width} {height}" role="img" aria-labelledby="title description">
   <title id="title">{escape(title)}</title>
   <desc id="description">{escape(description)}</desc>
   <style>{style}  </style>
-  {rect(0.5, 0.5, width - 1, height - 1, background, 16)}
+  {rect(0.5, 0.5, width - 1, height - 1, background, 16, RULE if background == BLACK else "none")}
   {content}
 </svg>
 '''
@@ -73,7 +74,7 @@ def svg(width, height, title, description, content, *, background=IVORY):
 
 def hero():
     identity = (
-        rect(41, 40, 8, 8, PEACOCK, 1)
+        rect(41, 40, 8, 8, LIME, 1)
         + text(62, 49, "DATA & CLOUD ENTHUSIAST", 12, style="mono muted")
         + text(36, 135, "Raditya Kemal", 76, style="serif")
         + text(38, 216, "Thooriq", 93, style="serif italic")
@@ -89,7 +90,7 @@ def hero():
     )
     portrait = (
         '<g transform="translate(552 28) scale(2.22)" fill="none" '
-        f'stroke="{NAVY}" stroke-width=".64" stroke-linecap="round">'
+        f'stroke="{WHITE}" stroke-width=".64" stroke-linecap="round">'
         + portrait + "</g>"
     )
     return svg(880, 345, "Raditya Kemal Thooriq",
@@ -155,7 +156,7 @@ def monthly(days):
         x = round(40 + (index + 0.5) * (533 / len(totals)), 1)
         height = max(3, round(104 * count / ceiling))
         highlight = count > 0 and month == peak_month
-        color = PEACOCK if highlight else NAVY if count else RULE
+        color = LIME if highlight else WHITE if count else RULE
         content += animate(rect(round(x - 13, 1), baseline - height, 26, height, color, 3),
                            850 + index * 34, "bar")
         if highlight:
@@ -187,7 +188,7 @@ def monthly(days):
 
 def project_card(title, description, label):
     content = (
-        rect(39, 30, 8, 8, PEACOCK, 1)
+        rect(39, 30, 8, 8, LIME, 1)
         + text(58, 39, label, 12, style="mono muted")
         + text(38, 79, title, 36, style="serif")
         + text(39, 111, description, 19, style="muted")
@@ -212,7 +213,7 @@ def read_days(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=ROOT / "data/contributions.json")
-    parser.add_argument("--output", type=Path, default=ROOT / "cards" / "ivory")
+    parser.add_argument("--output", type=Path, default=CARD_DIR)
     args = parser.parse_args()
     days = read_days(args.data)
     cards = {
