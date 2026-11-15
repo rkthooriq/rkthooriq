@@ -8,7 +8,7 @@ from textwrap import shorten
 from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 
-from render_readme_cards import (HEAT, IVORY, NAVY, PEACOCK, ROOT, animate, line,
+from render_readme_cards import (BLACK, CARD_DIR, GRAY, HEAT, LIME, ROOT, RULE, WHITE, animate, line,
                                  project_card, read_days, rect, svg, text)
 
 OWNER = "rkthooriq"
@@ -83,7 +83,7 @@ def languages_panel(sizes):
     description = "GitHub belum mendeteksi bahasa."
     if top:
         total = sum(count for _, count in top)
-        palette = (NAVY, PEACOCK, HEAT[3], HEAT[2], HEAT[1], HEAT[0])
+        palette = (LIME, WHITE, HEAT[3], GRAY, HEAT[2], HEAT[1])
         x = 27
         legend = []
         for index, (name, count) in enumerate(top):
@@ -106,7 +106,7 @@ def languages_panel(sizes):
 def overview_card(repos, days, sizes):
     stats, stats_description = stats_panel(repos, days)
     languages, languages_description = languages_panel(sizes)
-    panel = rect(0.5, 0.5, 425, 229, IVORY, 16)
+    panel = rect(0.5, 0.5, 425, 229, BLACK, 16, RULE)
     content = panel + stats + f'<g transform="translate(454 0)">{panel}{languages}</g>'
     return svg(880, 230, "GitHub Stats dan Most Used Languages",
                f"{stats_description}. {languages_description}", content, background="none")
@@ -161,7 +161,7 @@ def main():
     for sizes in project_sizes:
         total_sizes.update(sizes)
 
-    cards = ROOT / "cards/ivory"
+    cards = CARD_DIR
     days = read_days(ROOT / "data/contributions.json")
     update_readme(ROOT / "README.md", cards, repo, languages)
     cards.mkdir(parents=True, exist_ok=True)
